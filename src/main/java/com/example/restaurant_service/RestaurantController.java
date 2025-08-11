@@ -23,6 +23,14 @@ public class RestaurantController {
         return restaurantRepository.findAll();
     }
 
+    ///use this when you want to test Fallback mechanism.
+     /*  @GetMapping("/getRestaurant")
+    public List<Restaurant> getAllRestaurant() {
+        System.out.println("Simulating failure...");
+        throw new RuntimeException("Simulated service failure");
+    }*/
+
+
     @PostMapping("/addNewRestaurant")
     public Restaurant addRestaurant(@RequestBody Restaurant restaurant){
         if(restaurant.equals("abc")) {
