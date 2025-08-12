@@ -1,5 +1,6 @@
 package com.example.restaurant_service;
 
+import io.github.resilience4j.retry.annotation.Retry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,18 +18,19 @@ public class RestaurantController {
         this.restaurantRepository = restaurantRepository;
     }
 
-    @GetMapping("/getRestaurant")
+    /*@GetMapping("/getRestaurant")
     public List<Restaurant> getAllRestaurant(){
         System.out.println("aaa");
         return restaurantRepository.findAll();
-    }
+    }*/
 
     ///use this when you want to test Fallback mechanism.
-     /*  @GetMapping("/getRestaurant")
+        @Retry(name = "myRetry")
+       @GetMapping("/getRestaurant")
     public List<Restaurant> getAllRestaurant() {
         System.out.println("Simulating failure...");
         throw new RuntimeException("Simulated service failure");
-    }*/
+    }
 
 
     @PostMapping("/addNewRestaurant")
